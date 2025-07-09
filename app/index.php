@@ -5,44 +5,55 @@ $stmt = $pdo->query("SELECT * FROM products");
 $products = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Quản lý sản phẩm</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <h1>🛍️ Quản lý sản phẩm</h1>
-        <form method="POST" action="add.php" class="form-add">
-            <input type="text" name="name" placeholder="Tên sản phẩm" required>
-            <input type="number" name="price" placeholder="Hàng tồn kho" required>
-            <input type="number" name="quantity" placeholder="Số lượng" required>
-            <button type="submit">➕ Thêm</button>
-        </form>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📦 Quản lý sản phẩm</h2>
+    
+    <form method="POST" action="add.php" class="row g-3 mb-4">
+        <div class="col-md-4">
+            <input type="text" name="name" class="form-control" placeholder="Tên sản phẩm" required>
+        </div>
+        <div class="col-md-4">
+            <input type="number" name="price" class="form-control" placeholder="Hàng tồn kho" required>
+        </div>
+        <div class="col-md-3">
+            <input type="number" name="quantity" class="form-control" placeholder="Số lượng" required>
+        </div>
+        <div class="col-md-1 d-grid">
+            <button type="submit" class="btn btn-success">➕</button>
+        </div>
+    </form>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tên</th>
-                    <th>Hàng tồn kho</th>
-                    <th>Số lượng</th>
-                    <th>Xóa</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($products as $p): ?>
-                <tr>
-                    <td><?= $p['id'] ?></td>
-                    <td><?= htmlspecialchars($p['name']) ?></td>
-                    <td><?= $p['price'] ?></td>
-                    <td><?= $p['quantity'] ?></td>
-                    <td><a href="delete.php?id=<?= $p['id'] ?>" class="btn-delete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">❌</a></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-bordered table-hover bg-white">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>ID</th>
+                <th>Tên sản phẩm</th>
+                <th>Hàng tồn kho</th>
+                <th>Số lượng</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($products as $p): ?>
+            <tr class="align-middle">
+                <td class="text-center"><?= $p['id'] ?></td>
+                <td><?= htmlspecialchars($p['name']) ?></td>
+                <td class="text-end"><?= number_format($p['price']) ?> đ</td>
+                <td class="text-center"><?= $p['quantity'] ?></td>
+                <td class="text-center">
+                    <a href="delete.php?id=<?= $p['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')">❌</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
