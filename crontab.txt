@@ -1,0 +1,1 @@
+0 2 * * * /bin/bash /full/path/to/website-nginx-mysql/backup/backup.sh >> /var/log/db_backup.log 2>&1
