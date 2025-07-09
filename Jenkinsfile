@@ -4,13 +4,7 @@ pipeline {
         DOCKER_BUILDKIT = 1
     }
 
-   stage('Checkout') {
-    steps {
-        git branch: 'main', url: 'https://github.com/congnam101/website-nginx-mysql.git'
-    }
-}
-
-
+    stages {
         stage('Build & Deploy') {
             steps {
                 sh 'docker-compose down || true'
