@@ -4,12 +4,12 @@ pipeline {
         DOCKER_BUILDKIT = 1
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/congnam101/website-nginx-mysql.git'
-            }
-        }
+   stage('Checkout') {
+    steps {
+        git branch: 'main', url: 'https://github.com/congnam101/website-nginx-mysql.git'
+    }
+}
+
 
         stage('Build & Deploy') {
             steps {
