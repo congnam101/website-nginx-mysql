@@ -1,4 +1,1 @@
-xinchao
-tesst jenkins
-ci cd
-cuc cu
+tu build
